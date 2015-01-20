@@ -1,8 +1,9 @@
 package com.springapp.mvc;
 
 import com.springapp.mvc.config.AppConfig;
-import org.junit.Before;
-import org.junit.Test;
+import com.springapp.mvc.entity.User;
+import com.springapp.mvc.repository.UserRepository;
+import org.junit.*;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -28,6 +29,9 @@ public class AppTests {
 
     private MockMvc mockMvc;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @SuppressWarnings("SpringJavaAutowiringInspection")
     @Autowired
     protected WebApplicationContext wac;
@@ -35,6 +39,14 @@ public class AppTests {
     @Before
     public void setup() {
         this.mockMvc = webAppContextSetup(this.wac).build();
+        userRepository.deleteAll();
+        userRepository.save(new User("Ivan"));
+        userRepository.save(new User("Petro"));
+    }
+
+    @After
+    public void tearDown() {
+        //userRepository.deleteAll();
     }
 
     @Test
@@ -44,5 +56,17 @@ public class AppTests {
                 .andExpect(status().isOk())
                 .andExpect(view().name("hello"));
        LOG.info("***end simple***");
+    }
+
+    @Test
+    public void testFindAll() {
+        LOG.info("***Find all***");
+        userRepository.findAll().forEach(user -> LOG.info(user.toString()));
+    }
+
+    @Test
+    public void testFindWithRegex() {
+        LOG. info("***Find va***");
+        userRepository.findWithRegex("va").forEach(user -> LOG.info(user.toString()));
     }
 }
