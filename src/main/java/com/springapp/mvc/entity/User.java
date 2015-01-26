@@ -1,13 +1,22 @@
 package com.springapp.mvc.entity;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
+import java.util.List;
+
+@Document
 public class User {
 
     @Id
     private String id;
 
     private String name;
+
+    @DBRef
+    private List<Post> posts = new ArrayList<>();
 
     public User() {}
 
@@ -21,5 +30,13 @@ public class User {
 
     public String getName() {
         return name;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
     }
 }
