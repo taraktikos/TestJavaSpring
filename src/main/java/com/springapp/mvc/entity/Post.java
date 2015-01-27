@@ -1,8 +1,11 @@
 package com.springapp.mvc.entity;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.GeoSpatialIndexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.awt.*;
 
 @Document
 public class Post {
@@ -22,7 +25,6 @@ public class Post {
     public Post(String title, User user) {
         this.title = title;
         this.user = user;
-        this.user.getPosts().add(this);
     }
 
     public String getId() {

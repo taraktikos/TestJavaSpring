@@ -16,6 +16,9 @@ public class User {
     private String name;
 
     @DBRef
+    private Location location;
+
+    @DBRef
     private List<Post> posts = new ArrayList<>();
 
     public User() {}
@@ -38,5 +41,13 @@ public class User {
 
     public void setPosts(List<Post> posts) {
         this.posts = posts;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
     }
 }
