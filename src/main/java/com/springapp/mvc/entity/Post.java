@@ -1,11 +1,9 @@
 package com.springapp.mvc.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.GeoSpatialIndexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import java.awt.*;
 
 @Document
 public class Post {
@@ -17,6 +15,7 @@ public class Post {
 
     private String text;
 
+    @JsonBackReference
     @DBRef
     private User user;
 

@@ -1,5 +1,6 @@
 package com.springapp.mvc.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -18,6 +19,7 @@ public class User {
     @DBRef
     private Location location;
 
+    @JsonManagedReference
     @DBRef
     private List<Post> posts = new ArrayList<>();
 

@@ -7,6 +7,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.authentication.UserCredentials;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
+import org.springframework.data.web.config.EnableSpringDataWebSupport;
+import org.springframework.hateoas.MediaTypes;
+import org.springframework.hateoas.config.EnableHypermediaSupport;
+import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -14,9 +18,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import java.net.UnknownHostException;
 
 @Configuration
-@ComponentScan(basePackages = "com.springapp.mvc")
 @EnableWebMvc
+@EnableSpringDataWebSupport
+@EnableHypermediaSupport(type = {EnableHypermediaSupport.HypermediaType.HAL})
 @EnableMongoRepositories(basePackages = "com.springapp.mvc")
+@ComponentScan(basePackages = "com.springapp.mvc")
 public class AppConfig extends WebMvcConfigurerAdapter{
 
     @Bean
@@ -33,5 +39,10 @@ public class AppConfig extends WebMvcConfigurerAdapter{
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/assets/**").addResourceLocations("/assets/");
+    }
+
+    @Override
+    public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
+        configurer.defaultContentType(MediaTypes.HAL_JSON);
     }
 }
