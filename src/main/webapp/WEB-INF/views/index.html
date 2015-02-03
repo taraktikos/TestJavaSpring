@@ -30,7 +30,22 @@
 
     <div class="container">
         <div ng-controller="HelloController as hello">
-            <p>The content is {{hello.greeting}}</p>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Location</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="user in hello.users">
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.location.name }}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 
