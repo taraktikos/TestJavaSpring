@@ -1,14 +1,40 @@
 <!DOCTYPE html>
-<html ng-app="" lang="en" xmlns:th="http://www.thymeleaf.org">
+<html ng-app="blog" lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Hello AngularJS</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
-    <script th:src="@{/assets/js/hello.js}" src="../../assets/js/hello.js"></script>
+    <link th:href="@{/assets/css/bootstrap.css}" href="../../assets/css/bootstrap.css" rel="stylesheet" />
+    <link th:href="@{/assets/css/style.css}" href="../../assets/css/style.css" rel="stylesheet" />
 </head>
 <body>
-    <div ng-controller="Hello">
-        <p>The ID is {{greeting.id}}</p>
-        <p>The content is {{greeting.content}}</p>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" th:href="@{/}" href="./welcome.html">Spring MVC App</a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a th:href="@{/}" href="./welcome.html">Home</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li sec:authorize="!isAuthenticated()"><a href="./access/login.html" th:href="@{/login}">Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div ng-controller="HelloController as hello">
+            <p>The content is {{hello.greeting}}</p>
+        </div>
     </div>
+
+    <script th:src="@{/assets/js/angular.js}" src="../../assets/js/angular.js"></script>
+    <script th:src="@{/assets/js/hello.js}" src="../../assets/js/hello.js"></script>
 </body>
 </html>

@@ -51,6 +51,6 @@ public class HelloRestTest extends AppTests {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaTypes.HAL_JSON))
         ;
-        
+
     }
 }
