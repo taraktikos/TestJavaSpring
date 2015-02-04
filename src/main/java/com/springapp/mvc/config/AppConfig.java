@@ -4,6 +4,7 @@ import com.mongodb.MongoClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.data.authentication.UserCredentials;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.config.annotation.ContentNegotiationConfi
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguration;
 
 import java.net.UnknownHostException;
 
@@ -21,6 +23,7 @@ import java.net.UnknownHostException;
 @EnableWebMvc
 @EnableSpringDataWebSupport
 @EnableHypermediaSupport(type = {EnableHypermediaSupport.HypermediaType.HAL})
+@Import(RepositoryRestMvcConfiguration.class)
 @EnableMongoRepositories(basePackages = "com.springapp.mvc")
 @ComponentScan(basePackages = "com.springapp.mvc")
 public class AppConfig extends WebMvcConfigurerAdapter{

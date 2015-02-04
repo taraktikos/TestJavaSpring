@@ -3,9 +3,11 @@ package com.springapp.mvc;
 import com.springapp.mvc.config.AppConfig;
 import com.springapp.mvc.entity.Location;
 import com.springapp.mvc.entity.Post;
+import com.springapp.mvc.entity.Task;
 import com.springapp.mvc.entity.User;
 import com.springapp.mvc.repository.LocationRepository;
 import com.springapp.mvc.repository.PostRepository;
+import com.springapp.mvc.repository.TaskRepository;
 import com.springapp.mvc.repository.UserRepository;
 import org.junit.*;
 import org.junit.runner.RunWith;
@@ -31,7 +33,10 @@ public class AppTests {
     private PostRepository postRepository;
 
     @Autowired
-    LocationRepository locationRepository;
+    private LocationRepository locationRepository;
+
+    @Autowired
+    private TaskRepository taskRepository;
 
     @Before
     public void setup() {
@@ -54,6 +59,11 @@ public class AppTests {
         user2.getPosts().add(post2);
         userRepository.save(user1);
         userRepository.save(user2);
+
+        Task task = new Task();
+        task.setName("task1");
+        task.setChecked(false);
+        taskRepository.save(task);
     }
 
     @After
